@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "question": "What is your best friend's favorite color?",
+    "options": ["Red", "Blue", "Green", "Yellow"],
+    "correctAnswer": ""
+  },
+  {
+    "id": 2,
+    "question": "Which place would your best friend love to visit?",
+    "options": ["Paris", "Tokyo", "New York", "Sydney"],
+    "correctAnswer": ""
+  },
+  {
+    "id": 3,
+    "question": "What is your friend's favorite ice cream flavor?",
+    "options": ["Chocolate", "Vanilla", "Strawberry", "Mint"],
+    "correctAnswer": ""
+  },
+  {
+    "id": 4,
+    "question": "How does your friend like to spend weekends?",
+    "options": ["Watching movies", "Going on hikes", "Shopping", "Sleeping in"],
+    "correctAnswer": ""
+  },
+  {
+    "id": 5,
+    "question": "What is your friend's favorite hobby?",
+    "options": ["Reading", "Playing sports", "Cooking", "Gaming"],
+    "correctAnswer": ""
+  },
+  {
+    "id": 6,
+    "question": "If your friend could have any superpower, what would it be?",
+    "options": ["Invisibility", "Flying", "Time travel", "Mind reading"],
+    "correctAnswer": ""
+  },
+  {
+    "id": 7,
+    "question": "Which one of these is your friend's dream job?",
+    "options": ["Actor/Actress", "Doctor", "Entrepreneur", "Athlete"],
+    "correctAnswer": ""
+  },
+  {
+    "id": 8,
+    "question": "Which one of these snacks does your friend prefer?",
+    "options": ["Chips", "Cookies", "Popcorn", "Fruits"],
+    "correctAnswer": ""
+  },
+  {
+    "id": 9,
+    "question": "What is your friend's pet's name?",
+    "options": ["Buddy", "Max", "Bella", "Lucy"],
+    "correctAnswer": ""
+  },
+  {
+    "id": 10,
+    "question": "What is your friend's favorite season?",
+    "options": ["Winter", "Spring", "Summer", "Fall"],
+    "correctAnswer": ""
+  }
+]
