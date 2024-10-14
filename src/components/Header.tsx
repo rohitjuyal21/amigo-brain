@@ -22,7 +22,7 @@ const Header = () => {
   }
 
   return (
-    <header className="px-8 py-4 flex items-center justify-between">
+    <header className="px-4 sm:px-8 py-4 flex items-center justify-between">
       <div>
         <Link href={"/"} className="text-2xl font-bold">
           Amigo Brain 🧠

@@ -2,61 +2,51 @@
   {
     "id": 1,
     "question": "What is your best friend's favorite color?",
-    "options": ["Red", "Blue", "Green", "Yellow"],
-    "correctAnswer": ""
+    "options": ["Red", "Blue", "Green", "Yellow"]
   },
   {
     "id": 2,
     "question": "Which place would your best friend love to visit?",
-    "options": ["Paris", "Tokyo", "New York", "Sydney"],
-    "correctAnswer": ""
+    "options": ["Paris", "Tokyo", "New York", "Sydney"]
   },
   {
     "id": 3,
     "question": "What is your friend's favorite ice cream flavor?",
-    "options": ["Chocolate", "Vanilla", "Strawberry", "Mint"],
-    "correctAnswer": ""
+    "options": ["Chocolate", "Vanilla", "Strawberry", "Mint"]
   },
   {
     "id": 4,
     "question": "How does your friend like to spend weekends?",
-    "options": ["Watching movies", "Going on hikes", "Shopping", "Sleeping in"],
-    "correctAnswer": ""
+    "options": ["Watching movies", "Going on hikes", "Shopping", "Sleeping in"]
   },
   {
     "id": 5,
     "question": "What is your friend's favorite hobby?",
-    "options": ["Reading", "Playing sports", "Cooking", "Gaming"],
-    "correctAnswer": ""
+    "options": ["Reading", "Playing sports", "Cooking", "Gaming"]
   },
   {
     "id": 6,
     "question": "If your friend could have any superpower, what would it be?",
-    "options": ["Invisibility", "Flying", "Time travel", "Mind reading"],
-    "correctAnswer": ""
+    "options": ["Invisibility", "Flying", "Time travel", "Mind reading"]
   },
   {
     "id": 7,
     "question": "Which one of these is your friend's dream job?",
-    "options": ["Actor/Actress", "Doctor", "Entrepreneur", "Athlete"],
-    "correctAnswer": ""
+    "options": ["Actor/Actress", "Doctor", "Entrepreneur", "Athlete"]
   },
   {
     "id": 8,
     "question": "Which one of these snacks does your friend prefer?",
-    "options": ["Chips", "Cookies", "Popcorn", "Fruits"],
-    "correctAnswer": ""
+    "options": ["Chips", "Cookies", "Popcorn", "Fruits"]
   },
   {
     "id": 9,
     "question": "What is your friend's pet's name?",
-    "options": ["Buddy", "Max", "Bella", "Lucy"],
-    "correctAnswer": ""
+    "options": ["Buddy", "Max", "Bella", "Lucy"]
   },
   {
     "id": 10,
     "question": "What is your friend's favorite season?",
-    "options": ["Winter", "Spring", "Summer", "Fall"],
-    "correctAnswer": ""
+    "options": ["Winter", "Spring", "Summer", "Fall"]
   }
 ]

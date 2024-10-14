@@ -10,6 +10,7 @@ import {
 import { FlipWords } from "./ui/flip-words";
 import { PlaceholdersAndVanishInput } from "./ui/placeholders-and-vanish-input";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const words = ["Amigo", "Friend", "Dost", "Freund", "Ami"];
 
@@ -39,27 +40,28 @@ const placeholders = [
 
 const Landing = () => {
   const [name, setName] = useState("");
+  const router = useRouter();
 
   const handleSubmit = () => {
-    alert(name);
+    router.push("/questions");
   };
 
   return (
-    <div className="flex flex-col items-center justify-center flex-1 px-8">
-      <div className="max-w-xl space-y-8">
-        <h1 className="text-4xl font-bold text-center ">
+    <div className="flex flex-col items-center justify-center flex-1 p-4 sm:px-8">
+      <div className="max-w-xl space-y-6 sm:space-y-8 bg-muted/50 p-6 sm:p-8 rounded-xl">
+        <h1 className="text-3xl sm:text-4xl font-bold text-center ">
           Are you my
           <FlipWords words={words} />?
         </h1>
         <div className="flex flex-col justify-start">
-          <h4 className="text-xl font-medium mb-3">Instructions:</h4>
+          <h4 className="text-lg sm:text-xl font-medium mb-3">Instructions:</h4>
           <ul className="space-y-2">
             {quizInstructions.map((instruction, index) => (
               <li
                 key={index}
-                className="text-lg font-medium text-muted-foreground flex items-center gap-2"
+                className="sm:text-lg font-medium text-muted-foreground flex justify-start items-center gap-2"
               >
-                <instruction.icon className="size-5" />
+                <instruction.icon className="size-5 flex-shrink-0" />
                 {instruction.text}
               </li>
             ))}
