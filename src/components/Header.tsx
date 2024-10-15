@@ -1,9 +1,9 @@
 "use client";
-import { Button } from "@nextui-org/button";
 import { Github, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Button } from "./ui/button";
 
 const Header = () => {
   const [mounted, setMounted] = useState(false);
@@ -29,7 +29,7 @@ const Header = () => {
         </Link>
       </div>
       <div className="space-x-1">
-        <Button isIconOnly variant="light" onClick={toggleTheme}>
+        <Button size="icon" variant="ghost" onClick={toggleTheme}>
           {theme === "light" ? (
             <Moon className="size-5" />
           ) : (
@@ -41,7 +41,7 @@ const Header = () => {
           href={"https://github.com/rohitjuyal21/amigo-brain"}
           target="_blank"
         >
-          <Button isIconOnly variant="light">
+          <Button size="icon" variant="ghost">
             <Github className="size-5" />
           </Button>
         </Link>
