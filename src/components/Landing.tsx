@@ -44,8 +44,19 @@ const Landing = () => {
   const [name, setName] = useState("");
   const router = useRouter();
 
-  const handleSubmit = () => {
-    router.push("/questions");
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch("/api/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name }),
+      });
+      if (response.ok) return router.push("/questions");
+    } catch (error) {
+      console.log("Error while adding user", error);
+    }
   };
 
   return (

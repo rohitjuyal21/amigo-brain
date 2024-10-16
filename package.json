@@ -21,10 +21,12 @@
     "clsx": "^2.1.1",
     "framer-motion": "^11.11.8",
     "lucide-react": "^0.452.0",
+    "mongoose": "^8.7.1",
     "next": "14.2.15",
     "next-themes": "^0.3.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-hot-toast": "^2.4.1",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7"
   },

@@ -4,8 +4,10 @@ import { Input } from "./ui/input";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Button } from "./ui/button";
 import { ArrowRight } from "lucide-react";
+import FlipAnimation from "./FlipAnimation";
 
 interface IQuestionWrapper {
+  questions: Question[];
   question: Question | undefined;
   currentQuestion: number;
   onInputChange: (field: string, value: string, index?: number) => void;
@@ -15,6 +17,7 @@ interface IQuestionWrapper {
 }
 
 const QuestionWrapper: FC<IQuestionWrapper> = ({
+  questions,
   question,
   currentQuestion,
   onInputChange,
@@ -24,18 +27,22 @@ const QuestionWrapper: FC<IQuestionWrapper> = ({
 }) => {
   return (
     <div className="max-w-3xl w-full space-y-6 sm:space-y-8 bg-muted/50 p-6 sm:p-8 rounded-xl">
-      <h4 className="text-2xl font-bold text-center">
-        Question {currentQuestion + 1}/10
-      </h4>
+      <FlipAnimation key={currentQuestion}>
+        <h4 className="text-2xl font-bold text-center">
+          Question {currentQuestion + 1}/10
+        </h4>
+      </FlipAnimation>
       <div className="flex flex-col justify-start gap-4">
-        <Input
-          value={question?.question}
-          onChange={(e) => onInputChange("question", e.target.value)}
-          className="text-lg font-medium h-12 px-4"
-        />
+        <FlipAnimation key={currentQuestion}>
+          <Input
+            value={question?.question || ""}
+            onChange={(e) => onInputChange("question", e.target.value)}
+            className="text-lg font-medium h-12 px-4"
+          />
+        </FlipAnimation>
         <ul>
           <RadioGroup
-            value={selectedAnswer} // Bind the selected answer to the radio group
+            value={selectedAnswer}
             onValueChange={(value) => onOptionSelect(value)}
           >
             {question?.options.map((option, index) => (
@@ -52,15 +59,19 @@ const QuestionWrapper: FC<IQuestionWrapper> = ({
                       : "after:translate-x-full"
                   }`}
                 >
-                  <Input
-                    value={option}
-                    onChange={(e) =>
-                      onInputChange("option", e.target.value, index)
-                    }
-                    className={`relative text-lg font-medium h-10 px-4 bg-transparent transition duration-300 ${
-                      selectedAnswer === option ? "text-white" : "text-primary"
-                    }`}
-                  />
+                  <FlipAnimation key={currentQuestion}>
+                    <Input
+                      value={option || ""}
+                      onChange={(e) =>
+                        onInputChange("option", e.target.value, index)
+                      }
+                      className={`text-lg font-medium h-10 px-4 bg-transparent transition duration-300 ${
+                        selectedAnswer === option
+                          ? "text-white"
+                          : "text-primary"
+                      }`}
+                    />
+                  </FlipAnimation>
                 </div>
               </li>
             ))}
@@ -68,7 +79,13 @@ const QuestionWrapper: FC<IQuestionWrapper> = ({
         </ul>
         <div className="flex justify-center">
           <Button className="w-full" onClick={onNextQuestion}>
-            Next Question <ArrowRight className="size-5 ml-2" />
+            {currentQuestion >= questions.length - 1 ? (
+              "Submit"
+            ) : (
+              <>
+                Next Question <ArrowRight className="size-5 ml-2" />
+              </>
+            )}
           </Button>
         </div>
       </div>

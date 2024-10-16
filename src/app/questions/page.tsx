@@ -3,6 +3,7 @@ import Loading from "@/components/Loading";
 import QuestionWrapper from "@/components/QuestionWrapper";
 import { Question } from "@/types/question";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const Page = () => {
   const [questions, setQuestions] = useState<Question[] | null>(null);
@@ -54,11 +55,21 @@ const Page = () => {
   };
 
   const handleNextQuestion = () => {
-    setCurrentQuestion(currentQuestion + 1);
-    setUpdatedQuestions([...updatedQuestions, question!]);
-  };
+    if (questions) {
+      if (!selectedAnswer) {
+        return toast.error("Please select an answer");
+      }
 
-  console.log(updatedQuestions);
+      if (currentQuestion >= questions?.length - 1) {
+        console.log(updatedQuestions);
+      } else {
+        setCurrentQuestion(currentQuestion + 1);
+      }
+
+      setUpdatedQuestions([...updatedQuestions, question!]);
+      setSelectedAnswer(undefined);
+    }
+  };
 
   return (
     <div className="px-8 flex-1 flex flex-col items-center justify-center">
@@ -70,6 +81,7 @@ const Page = () => {
             Hi John, Select questions for your quiz
           </h1>
           <QuestionWrapper
+            questions={questions}
             question={question}
             currentQuestion={currentQuestion}
             onInputChange={handleInputChange}
