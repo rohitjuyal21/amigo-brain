@@ -1,6 +1,7 @@
 "use client";
 import Loading from "@/components/Loading";
 import QuestionWrapper from "@/components/QuestionWrapper";
+import { useQuiz } from "@/components/QuizContext";
 import { Question } from "@/types/question";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -13,6 +14,7 @@ const Page = () => {
     undefined
   );
   const [updatedQuestions, setUpdatedQuestions] = useState<Question[]>([]);
+  const { quizCreator } = useQuiz();
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -72,14 +74,20 @@ const Page = () => {
   };
 
   return (
-    <div className="px-8 flex-1 flex flex-col items-center justify-center">
+    <div className="px-8 flex-1 flex flex-col items-center justify-center my-4">
       {!questions ? (
         <Loading />
       ) : (
         <>
-          <h1 className="text-2xl font-bold text-center mb-8">
-            Hi John, Select questions for your quiz
-          </h1>
+          <div className="mb-8">
+            <h1 className="text-2xl sm:text-3xl font-bold text-center mb-3">
+              Hi {quizCreator}
+            </h1>
+            <p className="text-lg font-semibold text-center">
+              ✍️ You can edit questions and options according to your choice
+            </p>
+          </div>
+
           <QuestionWrapper
             questions={questions}
             question={question}

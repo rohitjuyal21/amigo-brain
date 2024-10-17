@@ -37,7 +37,7 @@ const QuestionWrapper: FC<IQuestionWrapper> = ({
           <Input
             value={question?.question || ""}
             onChange={(e) => onInputChange("question", e.target.value)}
-            className="text-lg font-medium h-12 px-4"
+            className="text-lg font-medium h-12 px-4 bg-transparent"
           />
         </FlipAnimation>
         <ul>

@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "react-hot-toast";
+import { QuizProvider } from "@/components/QuizContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -37,11 +38,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="max-w-screen-lg mx-auto flex flex-col min-h-screen h-full">
-            <Header />
-            {children}
-          </div>
-          <Toaster />
+          <QuizProvider>
+            <div className="max-w-screen-lg mx-auto flex flex-col min-h-screen h-full">
+              <Header />
+              {children}
+            </div>
+            <Toaster />
+          </QuizProvider>
         </ThemeProvider>
       </body>
     </html>
