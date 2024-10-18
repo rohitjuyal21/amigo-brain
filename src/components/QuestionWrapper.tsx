@@ -80,7 +80,7 @@ const QuestionWrapper: FC<IQuestionWrapper> = ({
         <div className="flex justify-center">
           <Button className="w-full" onClick={onNextQuestion}>
             {currentQuestion >= questions.length - 1 ? (
-              "Submit"
+              "Save and Share"
             ) : (
               <>
                 Next Question <ArrowRight className="size-5 ml-2" />

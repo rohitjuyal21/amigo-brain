@@ -156,23 +156,32 @@ export function PlaceholdersAndVanishInput({
   };
 
   const vanishAndSubmit = () => {
+    const value = inputRef.current?.value || "";
+
+    if (value.trim() === "") {
+      inputRef.current?.focus();
+      return;
+    }
+
     setAnimating(true);
     draw();
 
-    const value = inputRef.current?.value || "";
-    if (value && inputRef.current) {
-      const maxX = newDataRef.current.reduce(
-        (prev, current) => (current.x > prev ? current.x : prev),
-        0
-      );
-      animate(maxX);
-    }
+    const maxX = newDataRef.current.reduce(
+      (prev, current) => (current.x > prev ? current.x : prev),
+      0
+    );
+
+    animate(maxX);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    vanishAndSubmit();
-    onSubmit && onSubmit(e);
+    if (value.trim() === "") {
+      inputRef.current?.focus();
+    } else {
+      vanishAndSubmit();
+      onSubmit && onSubmit(e);
+    }
   };
   return (
     <form

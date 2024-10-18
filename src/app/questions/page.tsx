@@ -3,6 +3,7 @@ import Loading from "@/components/Loading";
 import QuestionWrapper from "@/components/QuestionWrapper";
 import { useQuiz } from "@/components/QuizContext";
 import { Question } from "@/types/question";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -15,14 +16,20 @@ const Page = () => {
   );
   const [updatedQuestions, setUpdatedQuestions] = useState<Question[]>([]);
   const { quizCreator } = useQuiz();
+  const router = useRouter();
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
         const response = await fetch("/questions.json");
         const data = await response.json();
-        setQuestions(data);
-        setQuestion(data[currentQuestion]);
+
+        const personalizedQuestions = data.map((q: Question) => ({
+          ...q,
+          question: q.question.replace("{name}", quizCreator),
+        }));
+        setQuestions(personalizedQuestions);
+        setQuestion(personalizedQuestions[currentQuestion]);
       } catch (error) {
         console.log(error);
       }
@@ -56,6 +63,24 @@ const Page = () => {
     }
   };
 
+  const saveQuiz = async () => {
+    try {
+      const response = await fetch("/api/quiz", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ questions: updatedQuestions }),
+      });
+      if (response.ok) {
+        const { quizId } = await response.json();
+        router.push(`/share-quiz/${quizId}`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleNextQuestion = () => {
     if (questions) {
       if (!selectedAnswer) {
@@ -63,7 +88,7 @@ const Page = () => {
       }
 
       if (currentQuestion >= questions?.length - 1) {
-        console.log(updatedQuestions);
+        saveQuiz();
       } else {
         setCurrentQuestion(currentQuestion + 1);
       }
@@ -74,7 +99,7 @@ const Page = () => {
   };
 
   return (
-    <div className="px-8 flex-1 flex flex-col items-center justify-center my-4">
+    <div className="p-4 sm:p-8 flex-1 flex flex-col items-center justify-center">
       {!questions ? (
         <Loading />
       ) : (
