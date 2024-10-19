@@ -49,15 +49,11 @@ const QuestionWrapper: FC<IQuestionWrapper> = ({
               <li key={index} className="flex items-center gap-3 mb-2">
                 <RadioGroupItem value={option} id={option} />
                 <div
-                  className={`relative overflow-hidden w-full rounded-md z-10 before:inset-0 before:absolute before:bg-green-400 before:rounded-s-md before:transition before:duration-500 before:-z-10 ${
+                  className={`relative overflow-hidden w-full rounded-md z-10 before:inset-0 before:absolute before:bg-green-400 before:rounded-s-md before:transition before:duration-500 before:-z-10 after:inset-0 after:absolute after:bg-green-400 after:rounded-e-md after:transition after:duration-500 after:-z-10 ${
                     selectedAnswer === option
-                      ? "before:translate-x-0"
-                      : "before:-translate-x-full"
-                  } after:inset-0 after:absolute after:bg-green-400 after:rounded-e-md after:transition after:duration-500 after:-z-10 ${
-                    selectedAnswer === option
-                      ? "after:translate-x-0"
-                      : "after:translate-x-full"
-                  }`}
+                      ? "before:translate-x-0 after:translate-x-0"
+                      : "before:-translate-x-full after:translate-x-full"
+                  } `}
                 >
                   <FlipAnimation key={currentQuestion}>
                     <Input

@@ -18,6 +18,7 @@ const FlipAnimation: React.FC<{ children: React.ReactNode }> = ({
       animate="animate"
       exit="exit"
       transition={{ duration: 0.6 }}
+      className="w-full"
     >
       {children}
     </motion.div>

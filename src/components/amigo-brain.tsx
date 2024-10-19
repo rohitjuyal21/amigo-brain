@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 
 import { motion } from "framer-motion";
 import { useQuiz } from "./QuizContext";
+import InstructionsList from "./InstructionsList";
 
 const words = ["Amigo", "Friend", "Dost", "Freund", "Ami"];
 
@@ -82,22 +83,7 @@ const AmigoBrain = () => {
             Are you my
             <FlipWords words={words} />?
           </h1>
-          <div className="flex flex-col justify-start">
-            <h4 className="text-lg sm:text-xl font-medium mb-3">
-              Instructions:
-            </h4>
-            <ul className="space-y-3">
-              {quizInstructions.map((instruction, index) => (
-                <li
-                  key={index}
-                  className="sm:text-lg font-medium text-muted-foreground flex justify-start items-center gap-2"
-                >
-                  <instruction.icon className="size-5 flex-shrink-0" />
-                  {instruction.text}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <InstructionsList instructions={quizInstructions} />
           <div>
             <PlaceholdersAndVanishInput
               onSubmit={handleSubmit}

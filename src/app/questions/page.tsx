@@ -63,14 +63,14 @@ const Page = () => {
     }
   };
 
-  const saveQuiz = async () => {
+  const saveQuiz = async (questionsToSave: Question[]) => {
     try {
       const response = await fetch("/api/quiz", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ questions: updatedQuestions }),
+        body: JSON.stringify({ questions: questionsToSave }),
       });
       if (response.ok) {
         const { quizId } = await response.json();
@@ -81,19 +81,23 @@ const Page = () => {
     }
   };
 
+  console.log(updatedQuestions);
+
   const handleNextQuestion = () => {
     if (questions) {
       if (!selectedAnswer) {
         return toast.error("Please select an answer");
       }
 
-      if (currentQuestion >= questions?.length - 1) {
-        saveQuiz();
+      const updatedQuestionsArray = [...updatedQuestions, question!];
+
+      if (currentQuestion >= questions.length - 1) {
+        saveQuiz(updatedQuestionsArray);
       } else {
+        setUpdatedQuestions(updatedQuestionsArray);
         setCurrentQuestion(currentQuestion + 1);
       }
 
-      setUpdatedQuestions([...updatedQuestions, question!]);
       setSelectedAnswer(undefined);
     }
   };

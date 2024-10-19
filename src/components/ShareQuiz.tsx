@@ -1,13 +1,17 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import toast from "react-hot-toast";
-import Result from "./Result";
+import Confetti from "react-confetti";
+import useWindowSize from "react-use/lib/useWindowSize";
+import Friendboard from "./Friendboard";
 
 const ShareQuiz = ({ quizId }: { quizId: string }) => {
   const [isCopied, setIsCopied] = useState(false);
+  const { width, height } = useWindowSize();
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const quizLink = `${process.env.NEXT_PUBLIC_BASE_URL}/play-quiz/${quizId}`;
 
@@ -17,6 +21,11 @@ const ShareQuiz = ({ quizId }: { quizId: string }) => {
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 2000);
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowConfetti(true), 300);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center flex-1 p-4 sm:p-8">
@@ -52,10 +61,18 @@ const ShareQuiz = ({ quizId }: { quizId: string }) => {
               <Button onClick={handleCopyLink}>Copy Link</Button>
             </div>
           </div>
-          <Result />
+          <Friendboard />
           <Button variant="destructive">Delete Quiz</Button>
         </div>
       </motion.div>
+      {showConfetti && (
+        <Confetti
+          width={width - 20}
+          height={height}
+          recycle={false}
+          numberOfPieces={500}
+        />
+      )}
     </div>
   );
 };

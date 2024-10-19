@@ -1,5 +1,6 @@
 import dbConnect from "@/lib/dbConnect";
 import { Quiz } from "@/models/Quiz";
+import { User } from "@/models/User";
 import { NextRequest } from "next/server";
 
 export async function GET(
@@ -16,8 +17,16 @@ export async function GET(
       return Response.json({ message: "Quiz not found" }, { status: 404 });
     }
 
-    return Response.json(quiz.questions);
+    const quizCreator = await User.findById(quiz.creator);
+
+    return Response.json({
+      quizCreator,
+      questions: quiz.questions,
+    });
   } catch (error) {
-    return Response.json({ message: "Error fetching quiz" }, { status: 500 });
+    return Response.json(
+      { message: "Error fetching quiz", error },
+      { status: 500 }
+    );
   }
 }
