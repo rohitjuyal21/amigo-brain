@@ -32,6 +32,6 @@ export async function GET({ params }: { params: { quizId: string } }) {
 
     return Response.json(playerScore);
   } catch (error) {
-    return Response.json("Internal Server Error", { status: 500 });
+    return Response.json(`Internal Server Error ${error}`, { status: 500 });
   }
 }

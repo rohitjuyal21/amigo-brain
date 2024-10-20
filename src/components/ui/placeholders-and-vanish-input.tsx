@@ -21,12 +21,13 @@ export function PlaceholdersAndVanishInput({
       setCurrentPlaceholder((prev) => (prev + 1) % placeholders.length);
     }, 3000);
   };
+
   const handleVisibilityChange = () => {
     if (document.visibilityState !== "visible" && intervalRef.current) {
-      clearInterval(intervalRef.current); // Clear the interval when the tab is not visible
+      clearInterval(intervalRef.current);
       intervalRef.current = null;
     } else if (document.visibilityState === "visible") {
-      startAnimation(); // Restart the interval when the tab becomes visible
+      startAnimation();
     }
   };
 
@@ -108,8 +109,7 @@ export function PlaceholdersAndVanishInput({
     const animateFrame = (pos: number = 0) => {
       requestAnimationFrame(() => {
         const newArr = [];
-        for (let i = 0; i < newDataRef.current.length; i++) {
-          const current = newDataRef.current[i];
+        for (const current of newDataRef.current) {
           if (current.x < pos) {
             newArr.push(current);
           } else {
@@ -127,8 +127,7 @@ export function PlaceholdersAndVanishInput({
         const ctx = canvasRef.current?.getContext("2d");
         if (ctx) {
           ctx.clearRect(pos, 0, 800, 800);
-          newDataRef.current.forEach((t) => {
-            const { x: n, y: i, r: s, color: color } = t;
+          newDataRef.current.forEach(({ x: n, y: i, r: s, color }) => {
             if (n > pos) {
               ctx.beginPath();
               ctx.rect(n, i, s, s);
@@ -156,9 +155,9 @@ export function PlaceholdersAndVanishInput({
   };
 
   const vanishAndSubmit = () => {
-    const value = inputRef.current?.value || "";
+    const inputValue = inputRef.current?.value || "";
 
-    if (value.trim() === "") {
+    if (inputValue.trim() === "") {
       inputRef.current?.focus();
       return;
     }
@@ -183,6 +182,7 @@ export function PlaceholdersAndVanishInput({
       onSubmit && onSubmit(e);
     }
   };
+
   return (
     <form
       className={cn(
@@ -193,7 +193,7 @@ export function PlaceholdersAndVanishInput({
     >
       <canvas
         className={cn(
-          "absolute pointer-events-none  text-base transform scale-50 top-[20%] left-2 sm:left-8 origin-top-left filter invert dark:invert-0 pr-20",
+          "absolute pointer-events-none text-base transform scale-50 top-[20%] left-2 sm:left-8 origin-top-left filter invert dark:invert-0 pr-20",
           !animating ? "opacity-0" : "opacity-100"
         )}
         ref={canvasRef}
@@ -240,46 +240,27 @@ export function PlaceholdersAndVanishInput({
               strokeDashoffset: "50%",
             }}
             animate={{
-              strokeDashoffset: value ? 0 : "50%",
+              strokeDashoffset: 0,
             }}
             transition={{
-              duration: 0.3,
-              ease: "linear",
+              duration: 0.2,
             }}
           />
-          <path d="M13 18l6 -6" />
-          <path d="M13 6l6 6" />
+          <motion.path
+            d="M12 5l7 7-7 7"
+            initial={{
+              strokeDasharray: "50%",
+              strokeDashoffset: "50%",
+            }}
+            animate={{
+              strokeDashoffset: 0,
+            }}
+            transition={{
+              duration: 0.2,
+            }}
+          />
         </motion.svg>
       </button>
-
-      <div className="absolute inset-0 flex items-center rounded-full pointer-events-none">
-        <AnimatePresence mode="wait">
-          {!value && (
-            <motion.p
-              initial={{
-                y: 5,
-                opacity: 0,
-              }}
-              key={`current-placeholder-${currentPlaceholder}`}
-              animate={{
-                y: 0,
-                opacity: 1,
-              }}
-              exit={{
-                y: -15,
-                opacity: 0,
-              }}
-              transition={{
-                duration: 0.3,
-                ease: "linear",
-              }}
-              className="dark:text-zinc-500 text-sm sm:text-base font-normal text-neutral-500 pl-4 sm:pl-12 text-left w-[calc(100%-2rem)] truncate"
-            >
-              {placeholders[currentPlaceholder]}
-            </motion.p>
-          )}
-        </AnimatePresence>
-      </div>
     </form>
   );
 }
