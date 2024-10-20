@@ -1,34 +1,13 @@
-import { TypewriterEffectSmooth } from "./ui/typewriter-effect";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import { TextGenerateEffect } from "./ui/text-generate-effect";
 
 const Landing = () => {
-  const words = [
-    {
-      text: "How",
-    },
-    {
-      text: "Well",
-    },
-    {
-      text: "Do",
-    },
-    {
-      text: "Your",
-    },
-    {
-      text: "Friends",
-    },
-    {
-      text: "Know",
-    },
-    {
-      text: "You?",
-    },
-  ];
+  const words = `How Well Do Your Friends Know You?`;
+
   return (
     <div className="flex-1 flex flex-col items-center justify-center">
-      <TypewriterEffectSmooth words={words} className="text-4xl" />
+      <TextGenerateEffect words={words} className="text-center mb-4 sm:mb-6" />
       <Button size="lg" asChild>
         <Link href={"/amigo-brain"}>Start Now</Link>
       </Button>

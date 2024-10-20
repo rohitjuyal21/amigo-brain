@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "react-hot-toast";
 import { QuizProvider } from "@/components/QuizContext";
 import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,6 +33,7 @@ export default function RootLayout({
               <Header />
               {children}
             </div>
+            <Analytics />
             <Toaster />
           </QuizProvider>
         </ThemeProvider>

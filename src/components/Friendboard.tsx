@@ -31,6 +31,8 @@ const Friendboard = ({ quizId }: { quizId: string }) => {
     fetchQuizResult();
   }, [quizId]);
 
+  const sortedResult = result?.sort((a, b) => b.score - a.score);
+
   return (
     <div className="flex items-center flex-col gap-6 sm:gap-8 max-w-2xl w-full">
       <h3 className="text-3xl font-bold">Friendboard</h3>
@@ -48,7 +50,7 @@ const Friendboard = ({ quizId }: { quizId: string }) => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {result?.map((item, index) => (
+              {sortedResult?.map((item, index) => (
                 <TableRow key={index}>
                   <TableCell className="text-lg text-center">
                     {item.playerName}

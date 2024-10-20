@@ -33,7 +33,6 @@ const Result = ({ quizId }: { quizId: string }) => {
       try {
         const response = await fetch(`/api/quiz/player/${quizId}`);
         const data = await response.json();
-        console.log(data);
         if (response.ok) {
           setPlayerScore(data.score);
         } else {
