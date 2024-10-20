@@ -12,7 +12,8 @@ const Page = ({ params }: { params: { quizId: string } }) => {
     if (createdQuiz !== params.quizId) {
       return router.push("/amigo-brain");
     }
-  }, []);
+  }, [createdQuiz, params.quizId, router]);
+
   return <ShareQuiz quizId={params.quizId} />;
 };
 

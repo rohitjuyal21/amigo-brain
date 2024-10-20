@@ -28,22 +28,22 @@ const PlayQuiz = ({ quizId }: { quizId: string }) => {
     }
   };
 
-  const fetchQuiz = async () => {
-    try {
-      const response = await fetch(`/api/quiz/${quizId}`);
-      const data = await response.json();
-      if (response.ok) {
-        setQuizData(data);
-        setQuestion(data.questions[currentQuestion]);
-      } else {
-        router.push("/amigo-brain");
-      }
-    } catch (error) {
-      console.log("Error fetching quiz data:", error);
-    }
-  };
-
   useEffect(() => {
+    const fetchQuiz = async () => {
+      try {
+        const response = await fetch(`/api/quiz/${quizId}`);
+        const data = await response.json();
+        if (response.ok) {
+          setQuizData(data);
+          setQuestion(data.questions[currentQuestion]);
+        } else {
+          router.push("/amigo-brain");
+        }
+      } catch (error) {
+        console.log("Error fetching quiz data:", error);
+      }
+    };
+
     fetchQuiz();
   }, []);
 

@@ -17,17 +17,17 @@ interface IResult {
 const Friendboard = ({ quizId }: { quizId: string }) => {
   const [result, setResult] = useState<IResult[] | null>(null);
 
-  const fetchQuizResult = async () => {
-    try {
-      const response = await fetch(`/api/quiz/result/${quizId}`);
-      const data = await response.json();
-      setResult(data.result);
-    } catch (error) {
-      console.log("Error fetching result", error);
-    }
-  };
-
   useEffect(() => {
+    const fetchQuizResult = async () => {
+      try {
+        const response = await fetch(`/api/quiz/result/${quizId}`);
+        const data = await response.json();
+        setResult(data.result);
+      } catch (error) {
+        console.log("Error fetching result", error);
+      }
+    };
+
     fetchQuizResult();
   }, []);
 

@@ -28,21 +28,21 @@ const Result = ({ quizId }: { quizId: string }) => {
   const { playerScore, setPlayerScore } = useQuiz();
   const router = useRouter();
 
-  const fetchPlayer = async () => {
-    try {
-      const response = await fetch(`/api/quiz/player/${quizId}`);
-      console.log(response);
-      const data = await response.json();
-      if (response.ok) {
-        setPlayerScore(data.score);
-      } else {
-        return router.push(`/play-quiz/${quizId}`);
-      }
-    } catch (error) {
-      console.log("Error fetching Player", error);
-    }
-  };
   useEffect(() => {
+    const fetchPlayer = async () => {
+      try {
+        const response = await fetch(`/api/quiz/player/${quizId}`);
+        console.log(response);
+        const data = await response.json();
+        if (response.ok) {
+          setPlayerScore(data.score);
+        } else {
+          return router.push(`/play-quiz/${quizId}`);
+        }
+      } catch (error) {
+        console.log("Error fetching Player", error);
+      }
+    };
     fetchPlayer();
   }, []);
 
