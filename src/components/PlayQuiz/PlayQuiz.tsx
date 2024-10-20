@@ -56,15 +56,18 @@ const PlayQuiz = ({ quizId }: { quizId: string }) => {
     setTimeout(() => {
       if (quizData && currentQuestion >= quizData.questions.length - 1) {
         submitScore();
-        return router.push(`/results/${quizId}`);
+        setTimeout(() => {
+          router.push(`/results/${quizId}`);
+        }, 300);
+      } else {
+        setCurrentQuestion((prev) => {
+          const nextQuestion = prev + 1;
+          if (quizData) {
+            setQuestion(quizData.questions[nextQuestion]);
+          }
+          return nextQuestion;
+        });
       }
-      setCurrentQuestion((prev) => {
-        const nextQuestion = prev + 1;
-        if (quizData) {
-          setQuestion(quizData.questions[nextQuestion]);
-        }
-        return nextQuestion;
-      });
       setIsAnswered(false);
       setSelectedAnswer(undefined);
     }, 1200);
