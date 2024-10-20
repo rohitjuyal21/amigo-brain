@@ -18,9 +18,8 @@ const PlayQuiz = ({ quizId }: { quizId: string }) => {
   );
   const [isAnswered, setIsAnswered] = useState(false);
   const [showQuiz, setShowQuiz] = useState(false);
-  const { playerName, setPlayerName } = useQuiz();
+  const { playerName, setPlayerName, playerScore, setPlayerScore } = useQuiz();
   const router = useRouter();
-  const [score, setScore] = useState(0);
 
   const handleSubmit = () => {
     if (playerName) {
@@ -50,7 +49,7 @@ const PlayQuiz = ({ quizId }: { quizId: string }) => {
   const handleOptionSelect = (option: string) => {
     setSelectedAnswer(option);
     if (option === question?.answer) {
-      setScore((prevScore) => prevScore + 1);
+      setPlayerScore((prevScore) => prevScore + 1);
     }
 
     setTimeout(() => {
@@ -80,7 +79,7 @@ const PlayQuiz = ({ quizId }: { quizId: string }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ quizId, playerName, score }),
+        body: JSON.stringify({ quizId, playerName, score: playerScore }),
       });
       if (!response.ok) {
         throw new Error("Failed to submit score");

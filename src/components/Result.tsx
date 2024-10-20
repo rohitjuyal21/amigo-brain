@@ -42,8 +42,10 @@ const Result = ({ quizId }: { quizId: string }) => {
         console.log("Error fetching Player", error);
       }
     };
-    fetchPlayer();
-  }, [quizId, router, setPlayerScore]);
+    if (!playerScore) {
+      fetchPlayer();
+    }
+  }, [quizId, router, setPlayerScore, playerScore]);
 
   return (
     <div className="flex flex-col items-center justify-center flex-1 p-4 sm:px-8">
