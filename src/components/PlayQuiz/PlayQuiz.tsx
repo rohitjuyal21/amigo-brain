@@ -45,7 +45,7 @@ const PlayQuiz = ({ quizId }: { quizId: string }) => {
     };
 
     fetchQuiz();
-  }, []);
+  }, [quizId, router, currentQuestion]);
 
   const handleOptionSelect = (option: string) => {
     setSelectedAnswer(option);

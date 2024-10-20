@@ -29,7 +29,7 @@ const Friendboard = ({ quizId }: { quizId: string }) => {
     };
 
     fetchQuizResult();
-  }, []);
+  }, [quizId]);
 
   return (
     <div className="flex items-center flex-col gap-6 sm:gap-8 max-w-2xl w-full">

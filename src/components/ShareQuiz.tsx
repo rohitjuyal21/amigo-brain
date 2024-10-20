@@ -42,21 +42,20 @@ const ShareQuiz = ({ quizId }: { quizId: string }) => {
     return () => clearTimeout(timer);
   }, []);
 
-  const fetchQuizData = async () => {
-    try {
-      const response = await fetch(`/api/quiz/${quizId}`);
-      if (response.ok) {
-        const data = await response.json();
-        setQuiz(data);
-      }
-    } catch (error) {
-      console.log("Error fetching quiz data:", error);
-    }
-  };
-
   useEffect(() => {
+    const fetchQuizData = async () => {
+      try {
+        const response = await fetch(`/api/quiz/${quizId}`);
+        if (response.ok) {
+          const data = await response.json();
+          setQuiz(data);
+        }
+      } catch (error) {
+        console.log("Error fetching quiz data:", error);
+      }
+    };
     fetchQuizData();
-  }, []);
+  }, [quizId]);
 
   const handleDeleteQuiz = async () => {
     try {
