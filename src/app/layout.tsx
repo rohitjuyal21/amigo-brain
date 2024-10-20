@@ -30,9 +30,13 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "AmigoBrain - Fun Quiz with Friends",
+    creator: "@rohitjuyal21",
     description:
       "Create quiz, share them with friends, and see who knows you best! Check the Friendboard for the final score.",
-    images: "https://amigo-brain.vercel.app/amigo-brain/image_1.png",
+    images: {
+      url: "https://amigo-brain.vercel.app/amigo-brain/image_1.png",
+      alt: "AmigoBrain Quiz App",
+    },
   },
 };
 
