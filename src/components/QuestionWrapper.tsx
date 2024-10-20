@@ -5,6 +5,7 @@ import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Button } from "./ui/button";
 import { ArrowRight } from "lucide-react";
 import FlipAnimation from "./FlipAnimation";
+import { Textarea } from "./ui/textarea";
 
 interface IQuestionWrapper {
   questions: Question[];
@@ -34,10 +35,10 @@ const QuestionWrapper: FC<IQuestionWrapper> = ({
       </FlipAnimation>
       <div className="flex flex-col justify-start gap-4">
         <FlipAnimation key={currentQuestion}>
-          <Input
+          <Textarea
             value={question?.question || ""}
             onChange={(e) => onInputChange("question", e.target.value)}
-            className="text-lg font-medium h-12 px-4 bg-transparent"
+            className="text-base sm:text-lg h-12 px-4 bg-transparent"
           />
         </FlipAnimation>
         <ul>
@@ -61,7 +62,7 @@ const QuestionWrapper: FC<IQuestionWrapper> = ({
                       onChange={(e) =>
                         onInputChange("option", e.target.value, index)
                       }
-                      className={`text-lg font-medium h-10 px-4 bg-transparent transition duration-300 ${
+                      className={`text-base sm:text-lg h-10 px-4 bg-transparent transition duration-300 ${
                         selectedAnswer === option
                           ? "text-white"
                           : "text-primary"

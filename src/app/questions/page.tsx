@@ -19,6 +19,12 @@ const Page = () => {
   const router = useRouter();
 
   useEffect(() => {
+    if (!quizCreator) {
+      router.push("/amigo-brain");
+    }
+  }, [quizCreator, router]);
+
+  useEffect(() => {
     const fetchQuestions = async () => {
       try {
         const response = await fetch("/questions.json");
@@ -36,7 +42,7 @@ const Page = () => {
     };
 
     fetchQuestions();
-  }, [currentQuestion]);
+  }, [currentQuestion, quizCreator]);
 
   useEffect(() => {
     if (questions) {
@@ -81,8 +87,6 @@ const Page = () => {
     }
   };
 
-  console.log(updatedQuestions);
-
   const handleNextQuestion = () => {
     if (questions) {
       if (!selectedAnswer) {
@@ -104,7 +108,7 @@ const Page = () => {
 
   return (
     <div className="p-4 sm:p-8 flex-1 flex flex-col items-center justify-center">
-      {!questions ? (
+      {!questions || !quizCreator ? (
         <Loading />
       ) : (
         <>
@@ -112,7 +116,7 @@ const Page = () => {
             <h1 className="text-2xl sm:text-3xl font-bold text-center mb-3">
               Hi {quizCreator}
             </h1>
-            <p className="text-lg font-semibold text-center">
+            <p className="text-lg font-semibold text-center leading-snug">
               ✍️ You can edit questions and options according to your choice
             </p>
           </div>

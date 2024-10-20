@@ -34,7 +34,7 @@ const PlayQuizQuestions: FC<IQuestionWrapper> = ({
       </FlipAnimation>
       <div className="flex flex-col justify-start gap-4">
         <FlipAnimation key={currentQuestion}>
-          <div className="text-lg font-medium py-3 px-4 rounded-md border-input border text-center w-full">
+          <div className="text-base sm:text-lg font-medium py-3 px-4 rounded-md border-input border text-center w-full">
             {question?.question}
           </div>
         </FlipAnimation>
@@ -54,7 +54,7 @@ const PlayQuizQuestions: FC<IQuestionWrapper> = ({
                   <RadioGroupItem value={option} id={option} />
                   <FlipAnimation key={currentQuestion}>
                     <div
-                      className={`relative overflow-hidden w-full px-4 py-2 border-input font-medium border text-lg rounded-md z-10 
+                      className={`relative overflow-hidden w-full px-4 py-2 border-input font-medium border text-base sm:text-lg rounded-md z-10 
                       `}
                     >
                       <div

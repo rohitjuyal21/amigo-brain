@@ -28,7 +28,7 @@ const Landing = () => {
   ];
   return (
     <div className="flex-1 flex flex-col items-center justify-center">
-      <TypewriterEffectSmooth words={words} className="sm:text-2xl" />
+      <TypewriterEffectSmooth words={words} className="text-4xl" />
       <Button size="lg" asChild>
         <Link href={"/amigo-brain"}>Start Now</Link>
       </Button>

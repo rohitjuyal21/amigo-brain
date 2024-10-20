@@ -15,8 +15,6 @@ export async function POST(req: NextRequest) {
     const cookieStore = cookies();
     const token = cookieStore.get("quizCreator");
 
-    console.log(token);
-
     if (!token) {
       return Response.json(
         { message: "User not authenticated to create a quiz." },
@@ -39,7 +37,6 @@ export async function POST(req: NextRequest) {
     }
 
     const { userId } = decodeToken;
-    console.log(userId);
 
     const { questions } = await req.json();
 
@@ -53,10 +50,43 @@ export async function POST(req: NextRequest) {
 
     await newQuiz.save();
 
+    cookies().set("createdQuiz", newQuiz.quizId, {
+      path: "/",
+      maxAge: 365 * 24 * 60 * 60,
+    });
+
     return Response.json({ quizId: newQuiz.quizId }, { status: 201 });
   } catch (error) {
     return Response.json(
       { message: `Error while creating quiz: ${error}` },
+      { status: 500 }
+    );
+  }
+}
+
+export async function GET() {
+  try {
+    await dbConnect();
+
+    const cookieStore = cookies();
+    const quizCreatorCookie = cookieStore.get("quizCreator");
+
+    if (!quizCreatorCookie) {
+      return Response.json({ message: "Quiz Id not found." }, { status: 400 });
+    }
+
+    const quizId = quizCreatorCookie.value;
+
+    const quiz = await Quiz.findOne({ quizId });
+
+    if (!quiz) {
+      return Response.json({ message: "Quiz not found" }, { status: 404 });
+    }
+
+    return Response.json({ quiz }, { status: 200 });
+  } catch (error) {
+    return Response.json(
+      { message: `Error fetching quiz: ${error}` },
       { status: 500 }
     );
   }
