@@ -31,6 +31,7 @@ AmigoBrain is a fun and engaging quiz application where users can create a perso
 
 ![](/public/amigo-brain/image_1.png)
 
+<<<<<<< HEAD
 ![](/public/amigo-brain/image_2.png)
 
 ![](/public/amigo-brain/image_3.png)
@@ -38,3 +39,19 @@ AmigoBrain is a fun and engaging quiz application where users can create a perso
 ![](/public/amigo-brain/image_4.png)
 
 ![](/public/amigo-brain/image_5.png)
+=======
+
+![](/public/amigo-brain/image_2.png)
+
+
+![](/public/amigo-brain/image_3.png)
+
+
+![](/public/amigo-brain/image_4.png)
+
+
+![](/public/amigo-brain/image_5.png)
+
+
+
+>>>>>>> b1ee4090a09737aa9a1b6a9e73f97eceaafa1d82
