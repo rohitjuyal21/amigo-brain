@@ -26,3 +26,22 @@ AmigoBrain is a fun and engaging quiz application where users can create a perso
 3. **Friends Take the Quiz**: Friends open the quiz link, answer the questions, and submit their answers.
 4. **View Scores**: After playing, friends see their score and a message based on their performance.
 5. **Friendboard**: The Friendboard displays the scores of all participants who have taken the quiz.
+
+## Screenshots
+
+![](/public/amigo-brain/image_1.png)
+
+
+![](/public/amigo-brain/image_2.png)
+
+
+![](/public/amigo-brain/image_3.png)
+
+
+![](/public/amigo-brain/image_4.png)
+
+
+![](/public/amigo-brain/image_5.png)
+
+
+
