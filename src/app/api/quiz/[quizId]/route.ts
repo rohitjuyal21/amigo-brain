@@ -2,12 +2,8 @@ import dbConnect from "@/lib/dbConnect";
 import { Quiz } from "@/models/Quiz";
 import { User } from "@/models/User";
 import { cookies } from "next/headers";
-import { NextRequest } from "next/server";
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { quizId: string } }
-) {
+export async function GET({ params }: { params: { quizId: string } }) {
   const quizId = params.quizId;
   try {
     await dbConnect();
@@ -32,10 +28,7 @@ export async function GET(
   }
 }
 
-export async function DELETE(
-  req: NextRequest,
-  { params }: { params: { quizId: string } }
-) {
+export async function DELETE({ params }: { params: { quizId: string } }) {
   const quizId = params.quizId;
   try {
     await dbConnect();
@@ -44,5 +37,9 @@ export async function DELETE(
     return Response.json({ message: "Quiz deleted successfully" });
   } catch (error) {
     console.log("Error deleting quiz", error);
+    return Response.json(
+      { message: "Error deleting quiz", error },
+      { status: 500 }
+    );
   }
 }
