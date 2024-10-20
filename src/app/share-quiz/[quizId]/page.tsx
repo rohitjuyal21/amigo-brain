@@ -4,9 +4,8 @@ import { getCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
-const page = ({ params }: { params: { quizId: string } }) => {
+const Page = ({ params }: { params: { quizId: string } }) => {
   const createdQuiz = getCookie("createdQuiz");
-  // const createdQuiz = cookieStore?.value;
   const router = useRouter();
 
   useEffect(() => {
@@ -17,4 +16,4 @@ const page = ({ params }: { params: { quizId: string } }) => {
   return <ShareQuiz quizId={params.quizId} />;
 };
 
-export default page;
+export default Page;
