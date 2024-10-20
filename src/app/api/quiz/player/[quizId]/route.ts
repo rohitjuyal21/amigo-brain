@@ -1,8 +1,12 @@
 import dbConnect from "@/lib/dbConnect";
 import { Quiz } from "@/models/Quiz";
 import { cookies } from "next/headers";
+import { NextRequest } from "next/server";
 
-export async function GET({ params }: { params: { quizId: string } }) {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: { quizId: string } }
+) {
   const { quizId } = params;
   const cookieStore = cookies().get(`quiz_${quizId}_result`);
   const playerData = cookieStore ? JSON.parse(cookieStore.value) : null;
