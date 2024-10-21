@@ -6,7 +6,7 @@ const Landing = () => {
   const words = `How Well Do Your Friends Know You?`;
 
   return (
-    <div className="flex-1 flex flex-col items-center justify-center">
+    <div className="flex-1 flex flex-col items-center justify-center p-4 sm:p-8">
       <TextGenerateEffect words={words} className="text-center mb-4 sm:mb-6" />
       <Button size="lg" asChild>
         <Link href={"/amigo-brain"}>Start Now</Link>
