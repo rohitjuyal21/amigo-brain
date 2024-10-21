@@ -18,8 +18,9 @@ const PlayQuiz = ({ quizId }: { quizId: string }) => {
   );
   const [isAnswered, setIsAnswered] = useState(false);
   const [showQuiz, setShowQuiz] = useState(false);
-  const { playerName, setPlayerName, playerScore, setPlayerScore } = useQuiz();
+  const { playerName, setPlayerName, setPlayerScore } = useQuiz();
   const router = useRouter();
+  const [score, setScore] = useState(0);
 
   const handleSubmit = () => {
     if (playerName) {
@@ -46,19 +47,26 @@ const PlayQuiz = ({ quizId }: { quizId: string }) => {
     fetchQuiz();
   }, [quizId, router, currentQuestion]);
 
+  useEffect(() => {
+    setPlayerScore(0);
+  }, [setPlayerScore]);
+
   const handleOptionSelect = (option: string) => {
     setSelectedAnswer(option);
-    if (option === question?.answer) {
-      setPlayerScore((prevScore) => prevScore + 1);
-    }
+    const isCorrect = option === question?.answer;
+    const newScore = isCorrect ? score + 1 : score;
+    setScore(newScore);
 
-    setTimeout(() => {
-      if (quizData && currentQuestion >= quizData.questions.length - 1) {
-        submitScore();
-        setTimeout(() => {
-          router.push(`/results/${quizId}`);
-        }, 300);
-      } else {
+    const isLastQuestion = currentQuestion >= quizData!.questions.length - 1;
+
+    if (isLastQuestion) {
+      setPlayerScore(newScore);
+      submitScore(newScore);
+      setTimeout(() => {
+        router.push(`/results/${quizId}`);
+      }, 300);
+    } else {
+      setTimeout(() => {
         setCurrentQuestion((prev) => {
           const nextQuestion = prev + 1;
           if (quizData) {
@@ -66,20 +74,20 @@ const PlayQuiz = ({ quizId }: { quizId: string }) => {
           }
           return nextQuestion;
         });
-      }
-      setIsAnswered(false);
-      setSelectedAnswer(undefined);
-    }, 1200);
+        setIsAnswered(false);
+        setSelectedAnswer(undefined);
+      }, 1200);
+    }
   };
 
-  const submitScore = async () => {
+  const submitScore = async (finalScore: number) => {
     try {
       const response = await fetch("/api/quiz/submit-score", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ quizId, playerName, score: playerScore }),
+        body: JSON.stringify({ quizId, playerName, score: finalScore }),
       });
       if (!response.ok) {
         throw new Error("Failed to submit score");
